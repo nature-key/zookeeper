@@ -73,9 +73,37 @@ zookeeper =文件管理+通知机制
 4，临时目录顺序编号节点
 
 
+get  /xiyou  watch 监控
+
+set /xiyou  "ddd"   节点的值
+
+
+ls /xiyou  watch
+create /xiyou/test "test"  路径的节点的控制
+
+
+delete /xiyou
+rmr /xuyou   逐个删除
+stat /xuyou  获取节点状态
+
+
+监听原理
+1.有一个主线程
+2.创建zkclient 建立两条线程 lister 和 connect
+3.connect会把监听的事件注册到zk上
+4，zk上有注册的注册列表
+5.当注册列表发生变化，就会通知lister
+6.然后就把变化交给process处理
 
 
 
+服务器动态上下线案例
+1，服务器启动注册信息到zk集群
+2.集群记录服务的ip 端口，配置信息
+3.激情就去getchildren，渠道当前在线服务器liebiao,并注册监听
+
+4.当服务下线，节点就会消失，
+5.process重新去获取服务器列表并注册监听
 
 
 
